@@ -1,0 +1,30 @@
+import express from 'express';
+import { engine } from 'express-handlebars';
+import path from 'path';
+import { ProductsRouter, CartsRouter, ViewsRouter } from '../routes/index.js';
+import { logger } from '../middlewares/logger.js';
+
+const initApp = () => {
+  const app = express();
+
+  app.use(express.json());
+  app.use(express.urlencoded({ extended: true }));
+  app.use(logger);
+
+  // 📌 Configurar Handlebars
+  app.engine('handlebars', engine());
+  app.set('view engine', 'handlebars');
+  app.set('views', path.resolve('views'));
+
+  // 📌 Servir archivos estáticos (CSS, JS en el frontend)
+  app.use(express.static('public'));
+
+  // 📌 Rutas principales
+  app.use('/api/products', ProductsRouter);
+  app.use('/api/carts', CartsRouter);
+  app.use('/', ViewsRouter);
+
+  return app;
+};
+
+export default initApp;

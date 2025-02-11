@@ -1,6 +1,7 @@
-// app/index.js
 import express from 'express';
-import { ProductsRouter, CartsRouter } from '../routes/index.js';
+import { engine } from 'express-handlebars';
+import path from 'path';
+import { ProductsRouter, CartsRouter, ViewsRouter } from '../routes/index.js';
 import { logger } from '../middlewares/logger.js';
 
 const initApp = () => {
@@ -10,14 +11,18 @@ const initApp = () => {
   app.use(express.urlencoded({ extended: true }));
   app.use(logger);
 
-  // Rutas principales
+  // 📌 Configurar Handlebars
+  app.engine('handlebars', engine());
+  app.set('view engine', 'handlebars');
+  app.set('views', path.resolve('views'));
+
+  // 📌 Servir archivos estáticos (CSS, JS en el frontend)
+  app.use(express.static('public'));
+
+  // 📌 Rutas principales
   app.use('/api/products', ProductsRouter);
   app.use('/api/carts', CartsRouter);
-
-  // Ruta para ver si la app responde
-  app.get('/', (_req, res) => {
-    res.send('Servidor funcionando correctamente');
-  });
+  app.use('/', ViewsRouter);
 
   return app;
 };

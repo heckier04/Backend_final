@@ -1,6 +1,3 @@
-<<<<<<< HEAD
-# villanti_backend_II
-=======
 📦 Proyecto de E-commerce con Express y Handlebars
 
 🚀 Descripción
@@ -111,4 +108,3 @@ La aplicación utiliza WebSockets para actualizar la vista en tiempo real cuando
 📜 Licencia
 
 Este proyecto está bajo la licencia Coder.
->>>>>>> master

@@ -17,12 +17,18 @@ const initApp = () => {
   app.set('views', path.resolve('views'));
 
   // 📌 Servir archivos estáticos (CSS, JS en el frontend)
-  app.use(express.static('public'));
+  app.use(express.static(path.resolve('public')));
 
   // 📌 Rutas principales
   app.use('/api/products', ProductsRouter);
   app.use('/api/carts', CartsRouter);
   app.use('/', ViewsRouter);
+
+  // 📌 Middleware para manejo de errores
+  app.use((err, req, res, next) => {
+    console.error(err.stack);
+    res.status(500).send('Something broke!');
+  });
 
   return app;
 };

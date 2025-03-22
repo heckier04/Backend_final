@@ -1,6 +1,5 @@
+import ProductsRouter from './products.js';
+import CartsRouter from './carts.js';
+import ViewsRouter from './views.js';
 
-import productsRouter from './products.js';
-import cartsRouter from './carts.js';
-import viewsRouter from './views.js';
-
-export { productsRouter as ProductsRouter, cartsRouter as CartsRouter, viewsRouter as ViewsRouter };
+export { ProductsRouter, CartsRouter, ViewsRouter };

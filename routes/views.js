@@ -30,7 +30,8 @@ res.render('index', { products }); // 📌 Ahora usa 'index'
 
 // 📌 Vista en tiempo real con WebSockets
 router.get('/realtimeproducts', (_req, res) => {
-res.render('realTimeProducts');
+    const products = readFile(); // Asegura que obtiene los productos
+    res.render('realTimeProducts', { products });
 });
 
 export default router;

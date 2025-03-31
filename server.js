@@ -4,11 +4,12 @@ import initApp from './app/index.js';
 import { config } from './config/index.js';
 import fs from 'fs';
 import path from 'path';
+import { initMongoAtlas } from './db/index.js'
 
 const app = initApp();
 const server = http.createServer(app);
 const io = new Server(server);
-
+initMongoAtlas()
 // 📌 Configuración del WebSocket
 const filePath = path.resolve('data', 'products.json');
 const readFile = () => (fs.existsSync(filePath) ? JSON.parse(fs.readFileSync(filePath, 'utf-8')) : []);

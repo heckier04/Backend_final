@@ -1,8 +1,10 @@
 import mongoose from 'mongoose';
 
-const userCollection = 'viajes';
+// Nombre de la colección en MongoDB
+const productCollection = 'viajes';
 
-const userSchema = new mongoose.Schema({
+// Esquema del producto
+const productSchema = new mongoose.Schema({
     id: {
         type: String,
         required: true,
@@ -45,6 +47,7 @@ const userSchema = new mongoose.Schema({
     ]
 }, { timestamps: true, versionKey: false });
 
-const UserModel = mongoose.model(userCollection, userSchema);
+// Crear el modelo basado en el esquema
+const ProductModel = mongoose.model(productCollection, productSchema);
 
-export default UserModel;
+export default ProductModel;

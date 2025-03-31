@@ -6,12 +6,13 @@ socket.on('updateProducts', (products) => {
   updateProductList(products);
 });
 
+
 // Función para actualizar la lista en el DOM
 function updateProductList(products) {
   const productList = document.getElementById('product-list');
   if (!productList) return;
 
   productList.innerHTML = products.map(product => `
-    <li>${product.name} - $${product.price}</li>
+    <li>${product.title} - $${product.price}</li>
   `).join('');
 }

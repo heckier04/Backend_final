@@ -40,5 +40,19 @@
       "url_imagen_3",
       "url_imagen_4"
     ]
+  },
+  {
+    "id": "682add8c-c5f6-4d01-b0a0-e9b530b3aa5a",
+    "title": "Producto 2",
+    "description": "Descripción del Producto 2",
+    "code": "P005",
+    "price": 100,
+    "status": true,
+    "stock": 10,
+    "category": "Electrónica",
+    "thumbnails": [
+      "url_imagen_3",
+      "url_imagen_4"
+    ]
   }
 ]

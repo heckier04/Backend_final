@@ -1,11 +1,13 @@
-import { connect } from 'mongoose'
-import { config } from '../config/index'
+import {connect} from 'mongoose';
+import { config } from '../config/index.js';
 
 export const initMongoAtlas = async () => {
-    try{
-        await connect(config.db.connectionString)
-        console.log('Connected to MongoDB:',config.db.connectionString )
-    } catch (error) {
-        console.log('Error connecting to MongoDB Atlas: ', error)
-    }
-}
+  try {
+    console.log('Intentando conectar a MongoDB con:', config.db.connectionString);
+    await connect(config.db.connectionString);
+    console.log('✅ Conexión exitosa a MongoDB');
+  } catch (error) {
+    console.error('❌ Error al conectar con MongoDB:', error.message);
+    process.exit(1); // Finaliza el proceso si no se puede conectar
+  }
+};

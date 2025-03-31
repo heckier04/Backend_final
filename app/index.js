@@ -3,6 +3,7 @@ import { engine } from 'express-handlebars';
 import path from 'path';
 import { ProductsRouter, CartsRouter, ViewsRouter } from '../routes/index.js';
 import { logger } from '../middlewares/logger.js';
+import 'dotenv/config';
 
 const initApp = () => {
   const app = express();
@@ -25,7 +26,7 @@ const initApp = () => {
   app.use('/', ViewsRouter);
 
   // 📌 Middleware para manejo de errores
-  app.use((err, req, res, next) => {
+  app.use(function (err, _req, res, _next) {
     console.error(err.stack);
     res.status(500).send('Something broke!');
   });

@@ -1,36 +1,58 @@
+import 'dotenv/config';
 import http from 'http';
 import { Server } from 'socket.io';
 import initApp from './app/index.js';
 import { config } from './config/index.js';
-import fs from 'fs';
-import path from 'path';
-import { initMongoAtlas } from './db/index.js'
+import { initMongoAtlas } from './db/index.js';
+import ProductModel from './models/products.models.js';
 
 const app = initApp();
 const server = http.createServer(app);
 const io = new Server(server);
-initMongoAtlas()
-// 📌 Configuración del WebSocket
-const filePath = path.resolve('data', 'products.json');
-const readFile = () => (fs.existsSync(filePath) ? JSON.parse(fs.readFileSync(filePath, 'utf-8')) : []);
 
-io.on('connection', (socket) => {
+// Conexión a MongoDB
+initMongoAtlas();
+
+// Configuración del WebSocket
+io.on('connection', async (socket) => {
   console.log('🟢 Cliente conectado');
 
-  socket.emit('updateProducts', readFile());
+  try {
+    // Enviar productos actuales al cliente
+    const products = await ProductModel.find();
+    socket.emit('updateProducts', products);
+  } catch (error) {
+    console.error("❌ Error al obtener los productos:", error);
+    socket.emit('error', { message: 'Error al obtener los productos' });
+  }
 
-  socket.on('newProduct', (product) => {
-    const products = readFile();
-    const newProduct = { id: Date.now().toString(), ...product };
-    products.push(newProduct);
-    fs.writeFileSync(filePath, JSON.stringify(products, null, 2));
-    io.emit('updateProducts', products);
+  // Evento para agregar un nuevo producto
+  socket.on('newProduct', async (product) => {
+    if (!product.title || !product.price) {
+      return socket.emit('error', { message: 'El título y el precio son obligatorios' });
+    }
+
+    try {
+      const newProduct = new ProductModel(product);
+      await newProduct.save();
+      const products = await ProductModel.find();
+      io.emit('updateProducts', products);
+    } catch (error) {
+      console.error("❌ Error al agregar el producto:", error);
+      socket.emit('error', { message: 'Error al agregar el producto' });
+    }
   });
 
-  socket.on('deleteProduct', (id) => {
-    let products = readFile().filter((product) => product.id !== id);
-    fs.writeFileSync(filePath, JSON.stringify(products, null, 2));
-    io.emit('updateProducts', products);
+  // Evento para eliminar un producto
+  socket.on('deleteProduct', async (id) => {
+    try {
+      await ProductModel.findByIdAndDelete(id);
+      const products = await ProductModel.find();
+      io.emit('updateProducts', products);
+    } catch (error) {
+      console.error("❌ Error al eliminar el producto:", error);
+      socket.emit('error', { message: 'Error al eliminar el producto' });
+    }
   });
 
   socket.on('disconnect', () => {
@@ -38,10 +60,7 @@ io.on('connection', (socket) => {
   });
 });
 
-// 📌 Pasar `io` a la app para que lo use `views.js`
-app.set('socketio', io);
-
-// 📌 Iniciar servidor
+// Iniciar servidor
 server.listen(config.PORT, () => {
   console.log(`🚀 Servidor corriendo en http://localhost:${config.PORT}`);
 });

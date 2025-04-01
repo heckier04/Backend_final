@@ -3,19 +3,20 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Product List</title>
+  <title>{{title}}</title> <!-- Título dinámico -->
 </head>
 <body>
-  <h1>Product List</h1>
-  <ul id="product-list"></ul>
+  <header>
+    <h1>Mi Aplicación</h1>
+  </header>
 
-  <form id="product-form">
-    <input type="text" id="title" placeholder="Product Title" required>
-    <input type="number" id="price" placeholder="Product Price" required>
-    <button type="submit">Add Product</button>
-  </form>
+  {{{body}}} <!-- Aquí se inserta el contenido de las vistas -->
+
+  <footer>
+    <p>© 2025 Mi Aplicación</p>
+  </footer>
 
   <script src="/socket.io/socket.io.js"></script>
-  <script src="/public/js/socket.js"></script> 
+  <script src="/js/socket.js"></script>
 </body>
 </html>

@@ -10,10 +10,12 @@
   {{#each products}}
     <li>
       <strong>{{this.title}}</strong> - {{this.price}} USD
-      <button onclick="deleteProduct('{{this.id}}')">🗑️ Eliminar</button>
+      <button onclick="deleteProduct('{{this._id}}')">🗑️ Eliminar</button>
     </li>
+  {{else}}
+    <li>No hay productos disponibles.</li>
   {{/each}}
 </ul>
 
 <script src="/socket.io/socket.io.js"></script>
-<script src="/public/js/socket.js"></script>
+<script src="/js/socket.js"></script>

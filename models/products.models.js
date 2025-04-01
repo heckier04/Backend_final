@@ -1,7 +1,7 @@
 import mongoose from 'mongoose';
 
 // Nombre de la colección en MongoDB
-const productCollection = 'viajes';
+const productCollection = 'products';
 
 // Esquema del producto
 const productSchema = new mongoose.Schema({

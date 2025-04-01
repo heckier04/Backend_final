@@ -1,0 +1,30 @@
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+    environment:
+      - userMongoDB=${userMongoDB}
+      - password=${password}
+    depends_on:
+      - mongo
+    volumes:
+      - .:/app
+      - /app/node_modules
+    command: ["npm", "start"]
+    restart: "no"
+
+  mongo:
+    image: mongo:6.0
+    container_name: backend_final
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo-data:/data/db
+    restart: "no"
+
+volumes:
+  mongo-data:

@@ -8,8 +8,8 @@ const router = Router();
 // 📌 Obtener todos los productos
 router.get('/', async (_req, res) => {
   try {
-    const products = await ProductModel.find();
-    res.json(products);
+    const products = await ProductModel.find(); // Obtiene todos los productos de MongoDB
+    res.status(200).json(products); // Devuelve los productos como JSON
   } catch (error) {
     console.error("❌ Error en GET /api/products:", error);
     res.status(500).json({ error: 'Error al obtener los productos' });
@@ -36,7 +36,8 @@ router.get('/:pid', async (req, res) => {
 });
 
 // 📌 Crear un nuevo producto
-router.post('/', validateInputProducts, async (req, res) => {
+router.post('/', async (req, res) => {
+  console.log(req.body); // Verifica los datos recibidos
   try {
     const { code } = req.body;
 

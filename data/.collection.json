@@ -1,0 +1,233 @@
+{
+	"info": {
+		"_postman_id": "d66e712c-e36e-41bd-9476-ffc19c82a7fb",
+		"name": "trabajo",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "41545726",
+		"_collection_link": "https://www.postman.com/science-astronomer-10987792/my-workspace/collection/weji44x/trabajo?action=share&source=collection_link&creator=41545726"
+	},
+	"item": [
+		{
+			"name": "product",
+			"item": [
+				{
+					"name": "get a componentes",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": \"6d99d373-d97e-462e-8cbe-2cc3c2e3a1a3\",\r\n    \"title\": \"No mas vuelos hasta el momento \",\r\n    \"description\": \"sin descripcion\",\r\n    \"code\": \"P003\",\r\n    \"price\": 10000000,\r\n    \"status\": true,\r\n    \"stock\": 1,\r\n    \"category\": \"viajes\",\r\n    \"thumbnails\": [\r\n        \"url_imagen_3\",\r\n        \"url_imagen_4\"\r\n    ],\r\n    \"_id\": \"67eb4901b654de89cedcfaea\",\r\n    \"createdAt\": \"2025-04-01T02:01:37.377Z\",\r\n    \"updatedAt\": \"2025-04-01T02:01:37.377Z\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/api/products",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"api",
+								"products"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "nuevo producto",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/api/products/67eb4901b654de89cedcfaea",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"api",
+								"products",
+								"67eb4901b654de89cedcfaea"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "crear producto",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"title\": \"Producto 2\",\r\n  \"description\": \"Descripción del Producto 2\",\r\n  \"code\": \"P005\",\r\n  \"price\": 100,\r\n  \"status\": true,\r\n  \"stock\": 10,\r\n  \"category\": \"Electrónica\",\r\n  \"thumbnails\": [\"url_imagen_3\", \"url_imagen_4\"]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/api/products",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"api",
+								"products"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "editar producto",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "    { \r\n        \"title\": \"No mas vuelos hasta el momento \",\r\n        \"description\": \"sin descripcion\",\r\n        \"code\": \"P003\",\r\n        \"price\": 10000000,\r\n        \"status\": true,\r\n        \"stock\": 1,\r\n        \"category\": \"viajes\",\r\n        \"thumbnails\": [\r\n            \"url_imagen_3\",\r\n            \"url_imagen_4\"\r\n        ]\r\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/api/products/6d99d373-d97e-462e-8cbe-2cc3c2e3a1a3",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"api",
+								"products",
+								"6d99d373-d97e-462e-8cbe-2cc3c2e3a1a3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "eliminar producto",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/api/products/0eb28597-0315-4550-a1f4-e51eee0ff047",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"api",
+								"products",
+								"0eb28597-0315-4550-a1f4-e51eee0ff047"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "cart",
+			"item": [
+				{
+					"name": "crear componentes",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Response status code is 200\", function () {\r",
+									"  pm.response.to.have.status(200);\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/api/carts",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"api",
+								"carts"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "New Request",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/api/carts/ba6266a2-cf2a-454d-93de-417be458ddde",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"api",
+								"carts",
+								"ba6266a2-cf2a-454d-93de-417be458ddde"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "New Request",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/api/carts/ba6266a2-cf2a-454d-93de-417be458ddde/product/05d63bc1-d678-411b-934c-41b8f163a298",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"api",
+								"carts",
+								"ba6266a2-cf2a-454d-93de-417be458ddde",
+								"product",
+								"05d63bc1-d678-411b-934c-41b8f163a298"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "vista",
+			"item": []
+		}
+	]
+}
